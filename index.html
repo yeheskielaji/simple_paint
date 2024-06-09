@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple Paint App</title>
+    <link rel="stylesheet" href="paint_styles.css" />
+  </head>
+  <body>
+    <div class="control-panel">
+      <button onclick="selectTool('line')">Line (DDA)</button>
+      <button onclick="selectTool('circle')">Circle (Midpoint)</button>
+      <button onclick="selectTool('pen')">Pen (Bresenham)</button>
+      <button onclick="selectTool('oval')">Oval (Midpoint)</button>
+      <button onclick="selectTool('fill')">Flood Fill</button>
+      <button onclick="selectTool('clear')">Clear Canvas</button>
+      <input
+        type="color"
+        id="colorPicker"
+        value="#000000"
+        onchange="setColor(this.value)"
+      />
+      <!-- Transformation controls -->
+      <select
+        id="transformSelect"
+        onchange="promptForTransformationValues(this.value)"
+      >
+        <option value="">Select Transformation</option>
+        <option value="translate">Translate</option>
+        <option value="rotate">Rotate</option>
+        <option value="scale">Scale</option>
+        <option value="reflect">Reflect</option>
+      </select>
+      <button onclick="applyTransform()">Apply</button>
+    </div>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script src="transformations.js"></script>
+    <script src="draw.js"></script>
+  </body>
+</html>
