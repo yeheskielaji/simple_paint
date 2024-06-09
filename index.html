@@ -17,7 +17,7 @@
     <div class="container-fluid">
       <div class="row no-gutters">
         <div
-          class="col-1 bg-dark text-white d-flex flex-column align-items-center py-3"
+          class="col-1 text-white d-flex flex-column align-items-center py-3 px-2"
         >
           <button
             class="btn btn-outline-light my-2"
@@ -28,13 +28,6 @@
           </button>
           <button
             class="btn btn-outline-light my-2"
-            onclick="selectTool('circle')"
-            title="Circle"
-          >
-            <i class="far fa-circle"></i>
-          </button>
-          <button
-            class="btn btn-outline-light my-2"
             onclick="selectTool('pen')"
             title="Pen"
           >
@@ -42,10 +35,17 @@
           </button>
           <button
             class="btn btn-outline-light my-2"
+            onclick="selectTool('circle')"
+            title="Circle"
+          >
+            <i class="far fa-circle"></i>
+          </button>
+          <button
+            class="btn btn-outline-light my-2"
             onclick="selectTool('oval')"
             title="Oval"
           >
-            <i class="fas fa-ellipsis-h"></i>
+            <i class="far fa-circle oval-icon"></i>
           </button>
           <button
             class="btn btn-outline-light my-2"

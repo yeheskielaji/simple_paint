@@ -1,19 +1,30 @@
 body {
-    background-color: #f8f9fa;
+    background-color: #d0d3d4;
     margin: 0;
     padding: 0;
     height: 100vh;
     overflow: hidden;
 }
 
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 #canvas {
     background-color: white;
-    border: 1px solid #000;
     display: block;
     margin: auto;
+    margin-top: 10vh;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .col-1 {
     height: 100vh;
     overflow-y: auto;
+    background-color: rgb(100, 98, 98);
+}
+
+.oval-icon {
+    transform: scaleX(1.5); 
 }

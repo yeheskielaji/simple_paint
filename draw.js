@@ -63,7 +63,7 @@ canvas.addEventListener('click', function(e) {
 function selectTool(tool) {
     currentTool = tool;
     if (tool === 'clear') {
-        shapes = []; // Clear the shapes array
+        shapes = []; 
         redraw();
     }
 }
@@ -76,14 +76,35 @@ function setColor(color) {
 function redraw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     shapes.forEach(shape => {
-        if (shape.type === 'line' || shape.type === 'pen') {
+        if (shape.type === 'line') {
             drawLineBresenham(shape.points[0].x, shape.points[0].y, shape.points[1].x, shape.points[1].y);
-        } else if (shape.type === 'circle') {
+        }
+        else if (shape.type === 'pen'){
+            drawLineDDA(shape.points[0].x, shape.points[0].y, shape.points[1].x, shape.points[1].y);
+        }
+        else if (shape.type === 'circle') {
             drawCircleMidpoint(shape.points[0].x, shape.points[0].y, shape.radius);
         } else if (shape.type === 'oval') {
             drawOvalMidpoint(shape.points[0].x, shape.points[0].y, shape.rx, shape.ry);
         }
     });
+}
+
+function drawLineDDA(x1, y1, x2, y2) {
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+    let steps = Math.max(Math.abs(dx), Math.abs(dy));
+
+    let xIncrement = dx / steps;
+    let yIncrement = dy / steps;
+
+    let x = x1;
+    let y = y1;
+    for (let i = 0; i <= steps; i++) {
+        ctx.fillRect(Math.round(x), Math.round(y), 1, 1);
+        x += xIncrement;
+        y += yIncrement;
+    }
 }
 
 function drawLineBresenham(x1, y1, x2, y2) {
