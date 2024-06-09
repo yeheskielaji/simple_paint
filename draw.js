@@ -186,24 +186,25 @@ function plotEllipsePoints(xc, yc, x, y) {
 function floodFill(x, y, fillColor) {
     const targetColor = getColorAtPixel(x, y);
     if (!colorsMatch(targetColor, fillColor)) {
-        floodFillRecursive(x, y, targetColor, fillColor);
+        let pixelStack = [[x, y]];
+        while (pixelStack.length) {
+            let newPos, x, y;
+            newPos = pixelStack.pop();
+            x = newPos[0];
+            y = newPos[1];
+
+            let currentColor = getColorAtPixel(x, y);
+            if (colorsMatch(currentColor, targetColor)) {
+                setColorAtPixel(x, y, fillColor);
+
+                pixelStack.push([x + 1, y]);
+                pixelStack.push([x - 1, y]);
+                pixelStack.push([x, y + 1]);
+                pixelStack.push([x, y - 1]);
+            }
+        }
         ctx.putImageData(imageData, 0, 0);
     }
-}
-
-function floodFillRecursive(x, y, targetColor, fillColor) {
-    const currentColor = getColorAtPixel(x, y);
-
-    if (!colorsMatch(currentColor, targetColor) || colorsMatch(currentColor, fillColor)) {
-        return;
-    }
-
-    setColorAtPixel(x, y, fillColor);
-
-    floodFillRecursive(x + 1, y, targetColor, fillColor);
-    floodFillRecursive(x - 1, y, targetColor, fillColor);
-    floodFillRecursive(x, y + 1, targetColor, fillColor);
-    floodFillRecursive(x, y - 1, targetColor, fillColor);
 }
 
 function getColorAtPixel(x, y) {

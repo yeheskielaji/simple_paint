@@ -3,36 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <title>Simple Paint App</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <link rel="stylesheet" href="paint_styles.css" />
   </head>
   <body>
-    <div class="control-panel">
-      <button onclick="selectTool('line')">Line (DDA)</button>
-      <button onclick="selectTool('circle')">Circle (Midpoint)</button>
-      <button onclick="selectTool('pen')">Pen (Bresenham)</button>
-      <button onclick="selectTool('oval')">Oval (Midpoint)</button>
-      <button onclick="selectTool('fill')">Flood Fill</button>
-      <button onclick="selectTool('clear')">Clear Canvas</button>
-      <input
-        type="color"
-        id="colorPicker"
-        value="#000000"
-        onchange="setColor(this.value)"
-      />
-      <!-- Transformation controls -->
-      <select
-        id="transformSelect"
-        onchange="promptForTransformationValues(this.value)"
-      >
-        <option value="">Select Transformation</option>
-        <option value="translate">Translate</option>
-        <option value="rotate">Rotate</option>
-        <option value="scale">Scale</option>
-        <option value="reflect">Reflect</option>
-      </select>
-      <button onclick="applyTransform()">Apply</button>
+    <div class="container-fluid">
+      <div class="row no-gutters">
+        <div
+          class="col-1 bg-dark text-white d-flex flex-column align-items-center py-3"
+        >
+          <button
+            class="btn btn-outline-light my-2"
+            onclick="selectTool('line')"
+            title="Line"
+          >
+            <i class="fas fa-slash"></i>
+          </button>
+          <button
+            class="btn btn-outline-light my-2"
+            onclick="selectTool('circle')"
+            title="Circle"
+          >
+            <i class="far fa-circle"></i>
+          </button>
+          <button
+            class="btn btn-outline-light my-2"
+            onclick="selectTool('pen')"
+            title="Pen"
+          >
+            <i class="fas fa-pen"></i>
+          </button>
+          <button
+            class="btn btn-outline-light my-2"
+            onclick="selectTool('oval')"
+            title="Oval"
+          >
+            <i class="fas fa-ellipsis-h"></i>
+          </button>
+          <button
+            class="btn btn-outline-light my-2"
+            onclick="selectTool('fill')"
+            title="Flood Fill"
+          >
+            <i class="fas fa-fill-drip"></i>
+          </button>
+          <button
+            class="btn btn-outline-light my-2"
+            onclick="selectTool('clear')"
+            title="Clear Canvas"
+          >
+            <i class="fas fa-trash"></i>
+          </button>
+          <input
+            type="color"
+            id="colorPicker"
+            class="my-2"
+            value="#000000"
+            onchange="setColor(this.value)"
+            title="Pick Color"
+          />
+          <select
+            id="transformSelect"
+            class="form-control my-2"
+            onchange="promptForTransformationValues(this.value)"
+          >
+            <option value="">Transformation</option>
+            <option value="translate">Translate</option>
+            <option value="rotate">Rotate</option>
+            <option value="scale">Scale</option>
+            <option value="reflect">Reflect</option>
+          </select>
+          <button class="btn btn-outline-light my-2" onclick="applyTransform()">
+            Apply
+          </button>
+        </div>
+        <div class="col-11">
+          <canvas id="canvas" width="1100" height="700"></canvas>
+        </div>
+      </div>
     </div>
-    <canvas id="canvas" width="800" height="600"></canvas>
     <script src="transformations.js"></script>
     <script src="draw.js"></script>
   </body>
