@@ -63,7 +63,7 @@ canvas.addEventListener('click', function(e) {
 function selectTool(tool) {
     currentTool = tool;
     if (tool === 'clear') {
-        shapes = []; 
+        shapes = [];
         redraw();
     }
 }
@@ -78,11 +78,9 @@ function redraw() {
     shapes.forEach(shape => {
         if (shape.type === 'line') {
             drawLineBresenham(shape.points[0].x, shape.points[0].y, shape.points[1].x, shape.points[1].y);
-        }
-        else if (shape.type === 'pen'){
+        } else if (shape.type === 'pen') {
             drawLineDDA(shape.points[0].x, shape.points[0].y, shape.points[1].x, shape.points[1].y);
-        }
-        else if (shape.type === 'circle') {
+        } else if (shape.type === 'circle') {
             drawCircleMidpoint(shape.points[0].x, shape.points[0].y, shape.radius);
         } else if (shape.type === 'oval') {
             drawOvalMidpoint(shape.points[0].x, shape.points[0].y, shape.rx, shape.ry);
@@ -100,61 +98,57 @@ function drawLineDDA(x1, y1, x2, y2) {
 
     let x = x1;
     let y = y1;
-    for (let i = 0; i <= steps; i++) {
-        ctx.fillRect(Math.round(x), Math.round(y), 1, 1);
+    for (let i = 0; i <= steps; i++) { ctx.fillRect(Math.round(x), Math.round(y), 1, 1);
         x += xIncrement;
-        y += yIncrement;
-    }
+        y += yIncrement; }
 }
 
 function drawLineBresenham(x1, y1, x2, y2) {
     let dx = Math.abs(x2 - x1);
     let sx = x1 < x2 ? 1 : -1;
-    let dy = -Math.abs(y2 - y1);
+    let dy = -Math.abs(y2 -
+        y1);
     let sy = y1 < y2 ? 1 : -1;
     let err = dx + dy;
-
     while (true) {
         ctx.fillRect(x1, y1, 1, 1);
-        if (x1 === x2 && y1 === y2) break;
+        if (x1 === x2 && y1 === y2)
+            break;
         let e2 = 2 * err;
         if (e2 >= dy) {
             err += dy;
             x1 += sx;
         }
-        if (e2 <= dx) {
-            err += dx;
-            y1 += sy;
-        }
+        if (e2 <= dx) { err += dx;
+            y1 += sy; }
     }
 }
 
 function drawCircleMidpoint(xc, yc, radius) {
     let x = radius;
     let y = 0;
-    let p = 1 - radius;
-
+    let
+        p = 1 - radius;
     while (x > y) {
         y++;
-        if (p <= 0) {
-            p = p + 2 * y + 1;
-        } else {
-            x--;
-            p = p + 2 * (y - x) + 1;
-        }
+        if (p <= 0) { p = p + 2 * y + 1; } else { x--;
+            p = p + 2 * (y - x) + 1; }
         plotCirclePoints(xc, yc, x, y);
     }
 }
 
 function plotCirclePoints(xc, yc, x, y) {
     ctx.fillRect(xc + x, yc + y, 1, 1);
-    ctx.fillRect(xc - x, yc + y, 1, 1);
+    ctx.fillRect(xc - x, yc + y,
+        1, 1);
     ctx.fillRect(xc + x, yc - y, 1, 1);
     ctx.fillRect(xc - x, yc - y, 1, 1);
-    ctx.fillRect(xc + y, yc + x, 1, 1);
+    ctx.fillRect(xc + y, yc + x,
+        1, 1);
     ctx.fillRect(xc - y, yc + x, 1, 1);
     ctx.fillRect(xc + y, yc - x, 1, 1);
-    ctx.fillRect(xc - y, yc - x, 1, 1);
+    ctx.fillRect(xc - y, yc - x,
+        1, 1);
 }
 
 function drawOvalMidpoint(xc, yc, rx, ry) {
@@ -165,24 +159,22 @@ function drawOvalMidpoint(xc, yc, rx, ry) {
     let tworx2 = 2 * rx2;
     let twory2 = 2 * ry2;
     let p = Math.round(ry2 - (rx2 * ry) + (0.25 * rx2));
-
     let px = 0;
-    let py = tworx2 * y;
-
+    let
+        py = tworx2 * y;
     while (px < py) {
         x++;
         px += twory2;
-        if (p < 0) {
-            p += ry2 + px;
-        } else {
+        if (p < 0) { p += ry2 + px; } else {
             y--;
             py -= tworx2;
-            p += ry2 + px - py;
+            p
+                += ry2 + px - py;
         }
         plotEllipsePoints(xc, yc, x, y);
     }
-
-    p = Math.round(ry2 * (x + 0.5) * (x + 0.5) + rx2 * (y - 1) * (y - 1) - rx2 * ry2);
+    p = Math.round(ry2 * (x + 0.5) * (x + 0.5) + rx2 * (y -
+        1) * (y - 1) - rx2 * ry2);
     while (y > 0) {
         y--;
         py -= tworx2;
@@ -207,7 +199,9 @@ function plotEllipsePoints(xc, yc, x, y) {
 function floodFill(x, y, fillColor) {
     const targetColor = getColorAtPixel(x, y);
     if (!colorsMatch(targetColor, fillColor)) {
-        let pixelStack = [[x, y]];
+        let pixelStack = [
+            [x, y]
+        ];
         while (pixelStack.length) {
             let newPos, x, y;
             newPos = pixelStack.pop();
@@ -259,7 +253,7 @@ function handleTransformationSelection(value) {
     const xInput = document.getElementById('transformX');
     const yInput = document.getElementById('transformY');
 
-    switch(value) {
+    switch (value) {
         case 'rotate':
             xInput.placeholder = "Enter Angle (degrees)";
             xInput.style.display = 'block';
@@ -283,7 +277,7 @@ function handleTransformationSelection(value) {
 }
 
 function promptForTransformationValues(transformationType) {
-    if (!transformationType) return; 
+    if (!transformationType) return;
     let parameters = {};
 
     switch (transformationType) {

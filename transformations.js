@@ -11,7 +11,7 @@ function applyTransformation(type, parameters, shapes) {
             break;
         case 'rotate':
             rotateShape(lastShape, parameters.angle);
-            break; 
+            break;
         case 'scale':
             if (!isNaN(parameters.scaleFactor)) {
                 scaleShape(lastShape, parameters.scaleFactor);
@@ -45,7 +45,7 @@ function rotateShape(shape, angle) {
 }
 
 function scaleShape(shape, scaleFactor) {
-    if (shape.type === 'circle' || shape.type ==='oval') {
+    if (shape.type === 'circle' || shape.type === 'oval') {
         shape.radius *= scaleFactor;
     } else {
         const center = findCenter(shape.points);
